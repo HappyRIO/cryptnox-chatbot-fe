@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  font-family: 'Jost', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Plus Jakarta Sans", Sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -37,7 +37,6 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
-  font-family: 'Anton', sans-serif;
 }
 
 button {
@@ -46,7 +45,6 @@ button {
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
-  font-family: inherit;
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
