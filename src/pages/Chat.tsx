@@ -10,10 +10,17 @@ interface Message {
   type: "user" | "bot";
 }
 
+const greeting = `Hello! 😊
+
+I hope you're doing well. I apologize for the delay in my delivery, but I have been working diligently to ensure the best results. To enhance speed and accuracy, I've explored various solutions, and I believe the current option is the most effective.
+I also think the UI could be modified to align more closely with the website style.
+
+Additionally, I find communication on Upwork a bit challenging. If possible, would you be open to using Telegram for smoother communication? My Telegram ID is @higodev.`;
+
 function App() {
   const [input, setInput] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>([
-    { text: "Hello!, how can I help you?", type: "bot" },
+    { text: greeting, type: "bot" },
   ]);
   const [thinking, setThinking] = useState(false);
   const [isChatVisible, setIsChatVisible] = useState<boolean>(false); // State to manage chat visibility
