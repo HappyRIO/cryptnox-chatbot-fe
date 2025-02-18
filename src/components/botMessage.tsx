@@ -6,7 +6,6 @@ const BotMessage = ({text}:{text: string}) => {
             {/* <h1 className="font-bold p-2 text-[#35302a] text-xl">Answer</h1> */}
               <div className={`inline-block p-2 text-[#574c3f]`}>
                 <ReactMarkdown>{text}</ReactMarkdown>
-                {/* {text} */}
               </div>
         </div>
     )
