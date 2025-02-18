@@ -145,6 +145,7 @@ function App() {
                       handleSubmit(e);
                     }
                   }}
+                  autoFocus
                   className="w-full p-3 pr-24 rounded-lg border border-gray-300 focus:outline-none focus:border-gray-400 bg-[#35302a] shadow-[0_0_15px_rgba(0,0,0,0.5)] shadow-white text-white"
                   aria-label="Chat message input"
                 />
