@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import UserMessage from "../components/userMessage";
 import BotMessage from "../components/botMessage";
 import { ChevronUp, Send, X } from "lucide-react";
@@ -24,6 +24,7 @@ function App() {
   ]);
   const [thinking, setThinking] = useState(false);
   const [isChatVisible, setIsChatVisible] = useState<boolean>(false); // State to manage chat visibility
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     setThinking(true);
@@ -87,6 +88,9 @@ function App() {
     // Clear input
     setThinking(false);
     setInput("");
+
+    inputRef.current?.focus();
+    console.log("Focus set to input element");
   };
 
   const toggleChatVisibility = () => {
@@ -135,7 +139,8 @@ function App() {
             <div className={`w-96 p-2 self-center bg-transparent`}>
               <form onSubmit={handleSubmit} className="relative flex">
                 <input
-                  disabled={thinking}
+                  ref={inputRef}
+                  // disabled={thinking}
                   placeholder="Ask a follow-up question..."
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
