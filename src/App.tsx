@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import ChatInterface from "./pages/Chat";
-import QuestionsFetcher from "./pages/Test";
+import QuestionsFetcher from "./pages/Question";
 // import Header from "./components/Header";
 // import Prompt from "./pages/Prompt";
 // import Train from "./pages/Train";

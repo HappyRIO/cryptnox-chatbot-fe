@@ -105,7 +105,7 @@ function App() {
   }, [input, messages]);
 
   return (
-    <div className="flex flex-col justify-end fixed bottom-4 right-4 max-w-96 h-screen">
+    <div className="flex flex-col justify-end fixed bottom-4 right-4 max-w-96 h-screen z-50">
       {isChatVisible && (
         <>
           <div
