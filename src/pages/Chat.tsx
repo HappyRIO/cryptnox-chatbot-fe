@@ -105,7 +105,7 @@ function App() {
   }, [input, messages]);
 
   return (
-    <div id="chatbot" className="flex flex-col justify-end fixed bottom-4 right-4 max-w-96 h-screen z-50">
+    <div id="chatbot" className="flex flex-col justify-end fixed bottom-4 right-4 max-w-96 h-screen z-50 bg-transparent">
       {isChatVisible && (
         <>
           <div
