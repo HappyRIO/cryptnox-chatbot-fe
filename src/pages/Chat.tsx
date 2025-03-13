@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import UserMessage from "../components/userMessage";
 import BotMessage from "../components/botMessage";
-import { ChevronUp, Send, X } from "lucide-react";
+import { ArrowUp, X } from "lucide-react";
 import Thinking from "../components/thinking";
 import logo from "../assets/cryptnox-logo.png";
+import message from "../assets/message.svg"
 
 interface Message {
   text: string;
@@ -27,10 +28,10 @@ function App() {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    setThinking(true);
     e.preventDefault();
+    if (!input || thinking) return;
 
-    if (!input) return;
+    setThinking(true);
 
     // Append user message to messages
     setMessages((prev) => [...prev, { text: input, type: "user" }]);
@@ -107,7 +108,7 @@ function App() {
   return (
     <div id="chatbot" className="flex flex-col justify-end fixed bottom-4 right-4 max-w-96 h-screen z-50 bg-transparent">
       {isChatVisible && (
-        <>
+        <div className="rounded-lg shadow-[0_0_15px_rgba(0,0,0,0.5)] shadow-black">
           <div
             id="chat-header"
             className="flex justify-center items-center p-4 rounded-t-lg bg-black"
@@ -116,12 +117,12 @@ function App() {
             {/* <h1 className="text-xl font-bold">Cryptnox</h1> */}
           </div>
 
-          <div className="flex flex-col rounded-b-lg bg-[#b7a58f] p-2 text-black">
+          <div className="flex flex-col rounded-b-lg 1bg-[#b7a58f] bg-green-50 p-2 text-black">
             <div
               id="chat-container"
               className="w-full h-[500px] flex flex-col items-center self-center overflow-y-auto space-y-4"
             >
-              <div className="flex-1 w-full items-center self-center p-2 space-y-1">
+              <div className="flex-1 w-full items-center self-center p-2 space-y-2">
                 {messages.map((msg, index) => (
                   <div key={index}>
                     {msg.type === "user" ? (
@@ -156,21 +157,21 @@ function App() {
                 />
                 <button
                   type="submit"
-                  className="absolute right-1 top-1/2 -translate-y-1/2 p-2 text-[#794444] bg-[#b7a58f] rounded-full hover:text-[#794444]"
+                  className="absolute right-1 top-1/2 -translate-y-1/2 p-2 bg-gray-500 hover:bg-gray-800 text-white rounded-full border-none focus:outline-none"
                   aria-label="Send message"
                 >
-                  <Send />
+                  <ArrowUp />
                 </button>
               </form>
             </div>
           </div>
-        </>
+        </div>
       )}
       <div
         onClick={toggleChatVisibility}
-        className="h-12 w-12 p-2 m-1 self-end text-[#7e4949] bg-[#534636] rounded-full right-0 hover:text-[#794444] cursor-pointer flex flex-col justify-center items-center"
+        className="h-14 w-14 m-1 self-end bg-gray-500 hover:bg-gray-800 text-white rounded-full right-0  cursor-pointer flex flex-col justify-center items-center"
       >
-        {isChatVisible ? <X /> : <ChevronUp />}
+        {isChatVisible ? <X className="h-8 w-8"/> : <img src={message} className="h-16 w-16 rounded-full"/>}
       </div>
     </div>
   );
