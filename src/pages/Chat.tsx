@@ -7,8 +7,8 @@ import logo from "../assets/cryptnox-logo.png";
 import message from "../assets/message.svg"
 
 interface Message {
-  text: string;
-  type: "user" | "bot";
+  role: "user" | "assistant";
+  content: string;
 }
 
 // const greeting = `Hello! 😊
@@ -21,7 +21,7 @@ interface Message {
 function App() {
   const [input, setInput] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>([
-    { text: "Hello, How are you?", type: "bot" },
+    // { role: "assistant", content: "Hello, How are you?" },
   ]);
   const [thinking, setThinking] = useState(false);
   const [isChatVisible, setIsChatVisible] = useState<boolean>(false); // State to manage chat visibility
@@ -34,17 +34,20 @@ function App() {
     setThinking(true);
 
     // Append user message to messages
-    setMessages((prev) => [...prev, { text: input, type: "user" }]);
+    setMessages((prev) => [...prev, { role: "user", content: input }]);
+
+    const data = [...messages, { role: "user", content: input }]
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/search`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/search`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
         },
-        body: JSON.stringify({ msg: input }),
+        body: JSON.stringify({ msg: data }),
       });
+      console.log(data)
 
       // Ensure there is a readable body
       if (!response.body) return;
@@ -56,7 +59,7 @@ function App() {
       let answer = "";
 
       // Initially, add a placeholder message for the bot
-      const botMessage: Message = { text: "", type: "bot" };
+      const botMessage: Message = { role: "assistant", content: "" };
       setMessages((prev) => [...prev, botMessage]);
 
       while (!done) {
@@ -72,7 +75,7 @@ function App() {
             const updatedMessages = [...prev];
             updatedMessages[updatedMessages.length - 1] = {
               ...updatedMessages[updatedMessages.length - 1],
-              text: answer,
+              content: answer,
             };
             return updatedMessages;
           });
@@ -82,7 +85,7 @@ function App() {
       console.error("Error while fetching data:", error);
       setMessages((prev) => [
         ...prev,
-        { text: "Error fetching response.", type: "bot" },
+        { role: "assistant", content: "Error fetching response." },
       ]);
     }
 
@@ -125,10 +128,10 @@ function App() {
               <div className="flex-1 w-full items-center self-center p-2 space-y-2">
                 {messages.map((msg, index) => (
                   <div key={index}>
-                    {msg.type === "user" ? (
-                      <UserMessage text={msg.text} />
+                    {msg.role === "user" ? (
+                      <UserMessage text={msg.content} />
                     ) : (
-                      <div>{msg.text && <BotMessage text={msg.text} />}</div>
+                      <div>{msg.content && <BotMessage text={msg.content} />}</div>
                     )}
                   </div>
                 ))}
