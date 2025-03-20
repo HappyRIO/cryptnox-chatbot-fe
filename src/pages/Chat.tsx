@@ -5,6 +5,7 @@ import { ArrowUp, X } from "lucide-react";
 import Thinking from "../components/thinking";
 import logo from "../assets/cryptnox-logo.png";
 import message from "../assets/message.svg"
+import { end_query } from "../types";
 
 interface Message {
   role: "user" | "assistant";
@@ -36,7 +37,12 @@ function App() {
     // Append user message to messages
     setMessages((prev) => [...prev, { role: "user", content: input }]);
 
-    const data = [...messages, { role: "user", content: input }]
+    const data = [...messages, { role: "user", content: input }] 
+    if (end_query.some((query) => input.toLowerCase().includes(query))) {
+      setInput("");
+      setThinking(false);
+      return;
+    }
 
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/search`, {

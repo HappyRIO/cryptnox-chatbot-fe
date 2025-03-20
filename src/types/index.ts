@@ -14,3 +14,21 @@ export interface Message {
     instruction: string;
     timestamp: Date;
   }
+
+  export const end_query = [
+    "okay",
+    "ok",
+    "sure",
+    "yes",
+    "yeah",
+    "yep",
+    "yup",
+    "yeppers",
+    "understand",
+    "got it",
+    "gotcha",
+    "alright",
+    "alrighty",
+    "alrighty then",
+    "I understand",
+  ]
