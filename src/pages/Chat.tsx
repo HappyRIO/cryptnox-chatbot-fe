@@ -5,7 +5,7 @@ import { ArrowUp, X } from "lucide-react";
 import Thinking from "../components/thinking";
 import logo from "../assets/cryptnox-logo.png";
 import message from "../assets/message.svg"
-import { end_query } from "../types";
+// import { end_query } from "../types";
 
 interface Message {
   role: "user" | "assistant";
@@ -30,7 +30,7 @@ function App() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!input || thinking) return;
+    if (!input.trim() || thinking) return;
 
     setThinking(true);
 
@@ -38,11 +38,11 @@ function App() {
     setMessages((prev) => [...prev, { role: "user", content: input }]);
 
     const data = [...messages, { role: "user", content: input }] 
-    if (end_query.some((query) => input.toLowerCase().includes(query))) {
-      setInput("");
-      setThinking(false);
-      return;
-    }
+    // if (end_query.some((query) => input.toLowerCase() == query )) {
+    //   setInput("");
+    //   setThinking(false);
+    //   return;
+    // }
 
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/search`, {
