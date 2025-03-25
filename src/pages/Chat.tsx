@@ -1,28 +1,16 @@
 import { useState, useEffect, useRef } from "react";
+import { ArrowUp, X } from "lucide-react";
 import UserMessage from "../components/userMessage";
 import BotMessage from "../components/botMessage";
-import { ArrowUp, X } from "lucide-react";
 import Thinking from "../components/thinking";
 import logo from "../assets/cryptnox-logo.png";
 import message from "../assets/message.svg"
-// import { end_query } from "../types";
-
-interface Message {
-  role: "user" | "assistant";
-  content: string;
-}
-
-// const greeting = `Hello! 😊
-
-// I hope you're doing well. I apologize for the delay in my delivery, but I have been working diligently to ensure the best results. To enhance speed and accuracy, I've explored various solutions, and I believe the current option is the most effective.
-// I also think the UI could be modified to align more closely with the website style.
-
-// Additionally, I find communication on Upwork a bit challenging. If possible, would you be open to using Telegram for smoother communication? My Telegram ID is @higodev.`;
+import { Message } from "../types";
 
 function App() {
   const [input, setInput] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>([
-    // { role: "assistant", content: "Hello, How are you?" },
+    { role: "assistant", content: "Hello, How can I help you?" },
   ]);
   const [thinking, setThinking] = useState(false);
   const [isChatVisible, setIsChatVisible] = useState<boolean>(false); // State to manage chat visibility
@@ -38,11 +26,6 @@ function App() {
     setMessages((prev) => [...prev, { role: "user", content: input }]);
 
     const data = [...messages, { role: "user", content: input }] 
-    // if (end_query.some((query) => input.toLowerCase() == query )) {
-    //   setInput("");
-    //   setThinking(false);
-    //   return;
-    // }
 
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/search`, {
@@ -71,6 +54,9 @@ function App() {
       while (!done) {
         const { value, done: isDone } = await reader.read();
         done = isDone;
+        if (!thinking) {
+          setThinking(false);
+        }
 
         if (value) {
           console.log(value);
@@ -96,7 +82,6 @@ function App() {
     }
 
     // Clear input
-    setThinking(false);
     setInput("");
 
     inputRef.current?.focus();
@@ -123,7 +108,6 @@ function App() {
             className="flex justify-center items-center p-4 rounded-t-lg bg-black"
           >
             <img src={logo} width={150} height={60} alt="logo" />
-            {/* <h1 className="text-xl font-bold">Cryptnox</h1> */}
           </div>
 
           <div className="flex flex-col rounded-b-lg 1bg-[#b7a58f] bg-green-50 p-2 text-black">
@@ -150,7 +134,6 @@ function App() {
               <form onSubmit={handleSubmit} className="relative flex">
                 <input
                   ref={inputRef}
-                  // disabled={thinking}
                   placeholder="Ask a follow-up question..."
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
@@ -161,7 +144,7 @@ function App() {
                     }
                   }}
                   autoFocus
-                  className="w-full p-3 pr-24 rounded-lg border border-gray-300 focus:outline-none focus:border-gray-400 bg-[#35302a] shadow-[0_0_15px_rgba(0,0,0,0.5)] shadow-white text-white"
+                  className="w-full p-3 pr-12 rounded-lg border border-gray-300 focus:outline-none focus:border-gray-400 bg-[#35302a] shadow-[0_0_15px_rgba(0,0,0,0.5)] shadow-white text-white"
                   aria-label="Chat message input"
                 />
                 <button

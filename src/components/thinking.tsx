@@ -1,27 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React from "react";
+import { motion } from "framer-motion";
 
 const Thinking: React.FC = () => {
-  const [dots, setDots] = useState<string>('');
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setDots((prevDots) => {
-        if (prevDots.length >= 3) {
-          return '';
-        }
-        return prevDots + '.';
-      });
-    }, 500);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <div className="flex items-center space-x-2 text-[#574c3f] animate-pulse">
-      <div className="w-4 h-4 rounded-full bg-[#574c3f] animate-bounce"></div>
-      <span className="text-lg font-medium">
-        Thinking{dots}
-      </span>
+    <div className="flex space-x-1.5">
+      {[0, 1, 2].map((i) => (
+        <motion.div
+          key={i}
+          className="w-2 h-2 rounded-full bg-gray-700"
+          animate={{ opacity: [0.3, 1, 0.3] }}
+          transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.3 }}
+        />
+      ))}
     </div>
   );
 };
