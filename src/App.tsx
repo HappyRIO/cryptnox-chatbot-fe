@@ -8,7 +8,8 @@ function App() {
       {/* <Header /> */}
       <Routes>
         <Route path="/" element={<ChatInterface />} />
-        {/* <Route path="/test" element={<QuestionsFetcher />} /> */}
+        <Route path="/chat" element={<ChatInterface />} />
+        <Route path="/dashboard" element={<ChatInterface />} />
       </Routes>
     </>
   );
