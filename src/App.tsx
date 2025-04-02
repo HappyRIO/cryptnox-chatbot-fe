@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import ChatInterface from "./pages/Chat";
+import Dashboard from "./pages/Dashboard";
 // import QuestionsFetcher from "./pages/Question";
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<ChatInterface />} />
         <Route path="/chat" element={<ChatInterface />} />
-        <Route path="/dashboard" element={<ChatInterface />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </>
   );
