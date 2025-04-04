@@ -90,9 +90,14 @@ function App() {
 
   const toggleChatVisibility = () => {
     setIsChatVisible((prev) => !prev);
-    const body = document.getElementsByTagName("iframe")[0];
-    body.style.width = "50%";  // You can change this to any size
-    body.style.height = "50%"; // You can change this to any size
+    const body = document.getElementById("chatbox");
+    if (body) {
+      body.style.width = "50%";  // You can change this to any size
+      body.style.height = "50%"; // You can change this to any size
+    } else {
+      console.error("Element with id 'chatbox' not found.");
+    }
+
   };
 
   useEffect(() => {
