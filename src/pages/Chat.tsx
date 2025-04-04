@@ -90,6 +90,10 @@ function App() {
 
   const toggleChatVisibility = () => {
     setIsChatVisible((prev) => !prev);
+    const newDiv = document.createElement("div");
+    newDiv.classList.add("new-div");
+    newDiv.innerHTML = "This is a new div!";
+    document.getElementsByTagName("body")[0].appendChild(newDiv);
   };
 
   useEffect(() => {
