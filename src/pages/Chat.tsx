@@ -108,7 +108,7 @@ function App() {
   }, [input, messages]);
 
   return (
-    <div id="chatbot" className="flex flex-col justify-end fixed bottom-1 right-1 max-w-96 h-[642px] z-50 bg-transparent">
+    <div id="chatbot" className="flex flex-col justify-end fixed bottom-0 right-0 max-w-96 h-[642px] z-50 bg-transparent">
       {(
         <div className="rounded-lg shadow-[0_0_15px_rgba(0,0,0,0.5)] shadow-black">
           <div
