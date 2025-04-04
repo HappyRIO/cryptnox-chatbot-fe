@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import { ArrowUp, X } from "lucide-react";
+import { ArrowUp } from "lucide-react";
 import UserMessage from "../components/userMessage";
 import BotMessage from "../components/botMessage";
 import Thinking from "../components/thinking";
 import logo from "../assets/cryptnox-logo.png";
-import message from "../assets/message.svg"
+// import message from "../assets/message.svg"
 import { Message } from "../types";
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
     { role: "assistant", content: "Hello, How can I help you?" },
   ]);
   const [thinking, setThinking] = useState(false);
-  const [isChatVisible, setIsChatVisible] = useState<boolean>(false); // State to manage chat visibility
+  // const [isChatVisible, setIsChatVisible] = useState<boolean>(false); // State to manage chat visibility
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -88,17 +88,17 @@ function App() {
     console.log("Focus set to input element");
   };
 
-  const toggleChatVisibility = () => {
-    setIsChatVisible((prev) => !prev);
-    const body = document.getElementById("chatbox");
-    if (body) {
-      body.style.width = "50%";  // You can change this to any size
-      body.style.height = "50%"; // You can change this to any size
-    } else {
-      console.error("Element with id 'chatbox' not found.");
-    }
+  // const toggleChatVisibility = () => {
+  //   setIsChatVisible((prev) => !prev);
+  //   const body = document.getElementById("chatbox");
+  //   if (body) {
+  //     body.style.width = "50%";  // You can change this to any size
+  //     body.style.height = "50%"; // You can change this to any size
+  //   } else {
+  //     console.error("Element with id 'chatbox' not found.");
+  //   }
 
-  };
+  // };
 
   useEffect(() => {
     const chatContainer = document.getElementById("chat-container");
@@ -108,8 +108,8 @@ function App() {
   }, [input, messages]);
 
   return (
-    <div id="chatbot" className="flex flex-col justify-end fixed bottom-4 right-4 max-w-96 h-screen z-50 bg-transparent">
-      {isChatVisible && (
+    <div id="chatbot" className="flex flex-col justify-end fixed bottom-4 right-4 max-w-96 h-screen1 z-50 bg-transparent">
+      {(
         <div className="rounded-lg shadow-[0_0_15px_rgba(0,0,0,0.5)] shadow-black">
           <div
             id="chat-header"
@@ -118,7 +118,7 @@ function App() {
             <img src={logo} width={150} height={60} alt="logo" />
           </div>
 
-          <div className="flex flex-col rounded-b-lg 1bg-[#b7a58f] bg-green-50 p-2 text-black">
+          <div className="flex flex-col rounded-b-lg bg-green-50 p-2 text-black">
             <div
               id="chat-container"
               className="w-full h-[500px] flex flex-col items-center self-center overflow-y-auto space-y-4"
@@ -167,12 +167,12 @@ function App() {
           </div>
         </div>
       )}
-      <div
+      {/* <div
         onClick={toggleChatVisibility}
         className="h-14 w-14 m-1 self-end bg-gray-500 hover:bg-gray-800 text-white rounded-full right-0  cursor-pointer flex flex-col justify-center items-center"
       >
         {isChatVisible ? <X className="h-8 w-8"/> : <img src={message} className="h-16 w-16 rounded-full"/>}
-      </div>
+      </div> */}
     </div>
   );
 }
