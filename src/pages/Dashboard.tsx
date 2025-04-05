@@ -98,7 +98,7 @@ const Dashboard = () => {
   );
 
   return (
-    <div className="h-screen w-screen mx-auto px-4 py-8">
+    <div className="h-full w-screen min-h-screen mx-auto px-4 py-8 bg-white text-black">
       <h1 className="text-3xl font-bold text-gray-800 mb-8">
         Conversation History
       </h1>
@@ -108,8 +108,11 @@ const Dashboard = () => {
         <div className="flex space-x-2">
           <select
             value={itemsPerPage}
-            onChange={(e) => setItemsPerPage(Number(e.target.value))}
-            className="border rounded px-2 py-1"
+            onChange={(e) => {
+              setItemsPerPage(Number(e.target.value));
+              setPage(1);
+            }}
+            className="border rounded px-2 py-1 bg-white"
           >
             <option value={10}>10</option>
             <option value={20}>20</option>
@@ -208,7 +211,7 @@ const Dashboard = () => {
                             prev ? { ...prev, bot: e.target.value } : null
                           )
                         }
-                        className="w-full border rounded px-2 py-1 min-h-[60px]"
+                        className="w-full border rounded px-2 py-1 min-h-[60px] bg-white"
                       />
                     ) : (
                       <ReactMarkdown>{chat.bot}</ReactMarkdown>
@@ -223,7 +226,7 @@ const Dashboard = () => {
                         <>
                           <button
                             onClick={handleSave}
-                            className="text-green-600 hover:text-green-900"
+                            className="text-green-600 hover:text-green-900 bg-white"
                           >
                             <Save className="h-5 w-5" />
                           </button>
@@ -232,7 +235,7 @@ const Dashboard = () => {
                               setEditingId(null);
                               setEditForm(null);
                             }}
-                            className="text-gray-600 hover:text-gray-900"
+                            className="text-gray-600 hover:text-gray-900 bg-white"
                           >
                             <X className="h-5 w-5" />
                           </button>
@@ -241,13 +244,13 @@ const Dashboard = () => {
                         <>
                           <button
                             onClick={() => handleEdit(chat)}
-                            className="text-blue-600 hover:text-blue-900"
+                            className="text-blue-600 hover:text-blue-900 bg-white"
                           >
                             <Edit2 className="h-5 w-5" />
                           </button>
                           <button
                             onClick={() => handleDelete(chat.id)}
-                            className="text-red-600 hover:text-red-900"
+                            className="text-red-600 hover:text-red-900 bg-white"
                           >
                             <Trash2 className="h-5 w-5" />
                           </button>
