@@ -112,7 +112,7 @@ function App() {
     if(!chatId) {
       setChatId(Math.floor(Math.random() * 1000000));
     }
-  }, [messages]);
+  }, []);
 
   return (
     <div id="chatbot" className="flex flex-col justify-end fixed bottom-0 right-0 max-w-96 h-[642px] z-50 bg-transparent">
