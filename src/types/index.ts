@@ -10,8 +10,10 @@ export interface User {
 
 export interface ChatData {
   id: number;
+  chatid: string;
   user: string;
   bot: string;
+  edited?: boolean;
   timestamp: string;
 }
 

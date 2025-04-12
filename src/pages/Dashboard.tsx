@@ -8,6 +8,7 @@ import {
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
+  Check,
 } from "lucide-react";
 // , ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight
 import ReactMarkdown from "react-markdown";
@@ -38,6 +39,7 @@ const Dashboard = () => {
       );
       const result = await response.json();
       setData([...result].reverse());
+      console.log(result);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -72,14 +74,21 @@ const Dashboard = () => {
   const handleSave = async () => {
     if (!editForm) return;
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/chats/${editForm.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ bot: editForm.bot }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/chats/${editForm.id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ bot: editForm.bot }),
+        }
+      );
       const result = await response.json();
-      if(result) {
-        setData(data.map((item) => (item.id === editForm.id ? editForm : item)));
+      if (result) {
+        setData(
+          data.map((item) =>
+            item.id === editForm.id ? { ...editForm, edited: true } : item
+          )
+        );
         setEditingId(null);
         setEditForm(null);
         toast.success("Chat updated successfully!"); // Success notification
@@ -185,9 +194,11 @@ const Dashboard = () => {
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
-                <th className="w-16 px-4 py-3">ID</th>
+                <th className="w-6 px-4 py-3">ID</th>
+                <th className="w-40 px-4 py-3">ChatID</th>
                 <th className="px-6 py-3">User</th>
                 <th className="px-6 py-3">Bot</th>
+                <th className="w-8 px-6 py-3">Edited</th>
                 <th className="w-32 px-4 py-3">Time</th>
                 <th className="w-24 px-4 py-3">Actions</th>
               </tr>
@@ -199,9 +210,8 @@ const Dashboard = () => {
                   className="hover:bg-gray-50 transition-colors duration-150"
                 >
                   <td className="px-4 py-4">{chat.id}</td>
-                  <td className="px-6 py-4">
-                    {chat.user}
-                  </td>
+                  <td className="px-2 py-4 w-40 text-nowrap">{chat.chatid}</td>
+                  <td className="px-6 py-4">{chat.user}</td>
                   <td className="px-6 py-4">
                     {editingId === chat.id ? (
                       <textarea
@@ -216,6 +226,9 @@ const Dashboard = () => {
                     ) : (
                       <ReactMarkdown>{chat.bot}</ReactMarkdown>
                     )}
+                  </td>
+                  <td className="px-6 py-4 flex items-center justify-center">
+                    {!chat.edited && <Check />}
                   </td>
                   <td className="px-4 py-4">
                     {new Date(chat.timestamp).toLocaleString()}

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { ArrowUp } from "lucide-react";
+import { v4 as uuidv4 } from 'uuid';
 import UserMessage from "../components/userMessage";
 import BotMessage from "../components/botMessage";
 import Thinking from "../components/thinking";
@@ -13,7 +14,7 @@ function App() {
     { role: "assistant", content: "Hello, How can I help you?" },
   ]);
   const [thinking, setThinking] = useState(false);
-  const [chatId, setChatId] = useState<number | null>(null);
+  const [chatId, setChatId] = useState<string | null>(null);
   // const [isChatVisible, setIsChatVisible] = useState<boolean>(false); // State to manage chat visibility
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -35,7 +36,7 @@ function App() {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
         },
-        body: JSON.stringify({ msg: data, chatId: chatId }),
+        body: JSON.stringify({ msg: data, chat_id: chatId }),
       });
       console.log(data)
 
@@ -110,7 +111,7 @@ function App() {
 
   useEffect(() => {
     if(!chatId) {
-      setChatId(Math.floor(Math.random() * 1000000));
+      setChatId(uuidv4());
     }
   }, []);
 
