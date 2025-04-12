@@ -13,6 +13,7 @@ function App() {
     { role: "assistant", content: "Hello, How can I help you?" },
   ]);
   const [thinking, setThinking] = useState(false);
+  const [chatId, setChatId] = useState<number | null>(null);
   // const [isChatVisible, setIsChatVisible] = useState<boolean>(false); // State to manage chat visibility
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -34,7 +35,7 @@ function App() {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
         },
-        body: JSON.stringify({ msg: data }),
+        body: JSON.stringify({ msg: data, chatId: chatId }),
       });
       console.log(data)
 
@@ -106,6 +107,12 @@ function App() {
       chatContainer.scrollTop = chatContainer.scrollHeight;
     }
   }, [input, messages]);
+
+  useEffect(() => {
+    if(!chatId) {
+      setChatId(Math.floor(Math.random() * 1000000));
+    }
+  }, [messages]);
 
   return (
     <div id="chatbot" className="flex flex-col justify-end fixed bottom-0 right-0 max-w-96 h-[642px] z-50 bg-transparent">
