@@ -13,7 +13,7 @@ export interface ChatData {
   chatid: string;
   user: string;
   bot: string;
-  edited?: boolean;
+  edited?: number;
   timestamp: string;
 }
 

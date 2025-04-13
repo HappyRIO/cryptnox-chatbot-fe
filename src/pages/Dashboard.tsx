@@ -86,7 +86,7 @@ const Dashboard = () => {
       if (result) {
         setData(
           data.map((item) =>
-            item.id === editForm.id ? { ...editForm, edited: true } : item
+            item.id === editForm.id ? { ...editForm, edited: 1 } : item
           )
         );
         setEditingId(null);
