@@ -1,22 +1,24 @@
 import { useState, useEffect, useRef } from "react";
-import { ArrowUp } from "lucide-react";
-import { v4 as uuidv4 } from 'uuid';
+// import { ArrowUp, Send, SendHorizonal, SendIcon } from "lucide-react";
+import { v4 as uuidv4 } from "uuid";
 import UserMessage from "../components/userMessage";
 import BotMessage from "../components/botMessage";
 import Thinking from "../components/thinking";
-import logo from "../assets/cryptnox-logo.png";
-// import message from "../assets/message.svg"
+import logo from "../assets/logo.svg";
+import sendButton from "../assets/sendbutton.svg"
 import { Message } from "../types";
 
 function App() {
   const [input, setInput] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>([
     { role: "assistant", content: "Hello, How can I help you?" },
+    { role: "user", content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit" },
   ]);
   const [thinking, setThinking] = useState(false);
   const [chatId, setChatId] = useState<string | null>(null);
   // const [isChatVisible, setIsChatVisible] = useState<boolean>(false); // State to manage chat visibility
   const inputRef = useRef<HTMLInputElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,18 +29,21 @@ function App() {
     // Append user message to messages
     setMessages((prev) => [...prev, { role: "user", content: input }]);
 
-    const data = [...messages, { role: "user", content: input }] 
+    const data = [...messages, { role: "user", content: input }];
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/search`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
-        body: JSON.stringify({ msg: data, chat_id: chatId }),
-      });
-      console.log(data)
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/search`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+          body: JSON.stringify({ msg: data, chat_id: chatId }),
+        }
+      );
+      console.log(data);
 
       // Ensure there is a readable body
       if (!response.body) return;
@@ -110,71 +115,78 @@ function App() {
   }, [input, messages]);
 
   useEffect(() => {
-    if(!chatId) {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, thinking]);
+
+  useEffect(() => {
+    if (!chatId) {
       setChatId(uuidv4());
     }
   }, []);
 
   return (
-    <div id="chatbot" className="flex flex-col justify-end fixed bottom-0 right-0 max-w-96 h-[642px] z-50 bg-transparent">
-      {(
-        <div className="rounded-lg shadow-[0_0_15px_rgba(0,0,0,0.5)] shadow-black">
+    <div
+      id="chatbot"
+      className="flex flex-col justify-end fixed bottom-0 right-0 max-w-[510px]1 h-[832px]1 bg-[url('/src/assets/background.svg')] bg-cover bg-center bg-no-repeat"
+    >
+      {
+        <div className="p-[26px] rounded-[32px] shadow-[0_0_15px_rgba(0,0,0,0.5)] shadow-black max-w-[510px] h-[832px] flex flex-col justify-between rounded-b-lg text-black">
           <div
             id="chat-header"
-            className="flex justify-center items-center p-4 rounded-t-lg bg-black"
+            className="flex justify-center items-center px-1 py-[19px]"
           >
-            <img src={logo} width={150} height={60} alt="logo" />
+            <img src={logo} width={450} height={35.48} alt="logo" />
           </div>
 
-          <div className="flex flex-col rounded-b-lg bg-green-50 p-2 text-black">
-            <div
-              id="chat-container"
-              className="w-full h-[500px] flex flex-col items-center self-center overflow-y-auto space-y-4"
-            >
-              <div className="flex-1 w-full items-center self-center p-2 space-y-2">
-                {messages.map((msg, index) => (
-                  <div key={index}>
-                    {msg.role === "user" ? (
-                      <UserMessage text={msg.content} />
-                    ) : (
-                      <div>{msg.content && <BotMessage text={msg.content} />}</div>
-                    )}
-                  </div>
-                ))}
-                {thinking && <Thinking />}
-              </div>
-            </div>
-
-            {/* Footer */}
-            <div className={`w-96 p-2 self-center bg-transparent`}>
-              <form onSubmit={handleSubmit} className="relative flex">
-                <input
-                  ref={inputRef}
-                  placeholder="Ask a follow-up question..."
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" && !e.shiftKey) {
-                      e.preventDefault();
-                      handleSubmit(e);
-                    }
-                  }}
-                  autoFocus
-                  className="w-full p-3 pr-12 rounded-lg border border-gray-300 focus:outline-none focus:border-gray-400 bg-[#35302a] shadow-[0_0_15px_rgba(0,0,0,0.5)] shadow-white text-white"
-                  aria-label="Chat message input"
-                />
-                <button
-                  type="submit"
-                  className="absolute right-1 top-1/2 -translate-y-1/2 p-2 bg-gray-500 hover:bg-gray-800 text-white rounded-full border-none focus:outline-none"
-                  aria-label="Send message"
-                >
-                  <ArrowUp />
-                </button>
-              </form>
+          {/* <div className="flex flex-col h-full justify-between rounded-b-lg p-2 text-black"> */}
+          <div className="flex-1 w-full overflow-y-auto space-y-4" id="chat-container">
+          <div className="flex flex-col w-full justify-end space-y-2">
+              {messages.map((msg, index) => (
+                <div key={index}>
+                  {msg.role === "user" ? (
+                    <UserMessage text={msg.content} />
+                  ) : (
+                    <div>
+                      {msg.content && <BotMessage text={msg.content} />}
+                    </div>
+                  )}
+                </div>
+              ))}
+              {thinking && <Thinking />}
+              <div ref={messagesEndRef} />
             </div>
           </div>
+
+          {/* Footer */}
+          <div className={`w-full py-9 self-center`}>
+            <form onSubmit={handleSubmit} className="relative flex">
+              <input
+                ref={inputRef}
+                placeholder="Ask a follow-up question..."
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    handleSubmit(e);
+                  }
+                }}
+                autoFocus
+                className="w-full p-3 pr-12 rounded-lg border border-[#1602114D] focus:outline-none focus:border-gray-400 bg-white shadow-[0_0_15px_rgba(0,0,0,0.5)] shadow-white text-black"
+                aria-label="Chat message input"
+              />
+              <button
+                type="submit"
+                className="absolute right-1 top-1/2 -translate-y-1/2 p-2 border-none bg-transparent cursor-pointer"
+                aria-label="Send message"
+              >
+                <img src={sendButton} alt="Send message" />
+              </button>
+            </form>
+          </div>
+          {/* </div> */}
         </div>
-      )}
+      }
       {/* <div
         onClick={toggleChatVisibility}
         className="h-14 w-14 m-1 self-end bg-gray-500 hover:bg-gray-800 text-white rounded-full right-0  cursor-pointer flex flex-col justify-center items-center"
