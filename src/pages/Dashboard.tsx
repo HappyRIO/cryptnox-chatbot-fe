@@ -228,7 +228,7 @@ const Dashboard = () => {
                     )}
                   </td>
                   <td className="px-6 py-4 flex items-center justify-center">
-                    {chat.edited && <Check />}
+                    {chat.edited == 1 && <Check />}
                   </td>
                   <td className="px-4 py-4">
                     {new Date(chat.timestamp).toLocaleString()}
