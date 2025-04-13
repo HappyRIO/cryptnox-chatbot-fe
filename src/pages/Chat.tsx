@@ -12,7 +12,6 @@ function App() {
   const [input, setInput] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>([
     { role: "assistant", content: "Hello, How can I help you?" },
-    { role: "user", content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit" },
   ]);
   const [thinking, setThinking] = useState(false);
   const [chatId, setChatId] = useState<string | null>(null);
