@@ -227,8 +227,8 @@ const Dashboard = () => {
                       <ReactMarkdown>{chat.bot}</ReactMarkdown>
                     )}
                   </td>
-                  <td className="px-6 py-4 flex items-center justify-center">
-                    {chat.edited == 1 && <Check />}
+                  <td className="px-6 py-4">
+                    {chat.edited == 1 && <Check className="flex w-full" />}
                   </td>
                   <td className="px-4 py-4">
                     {new Date(chat.timestamp).toLocaleString()}
