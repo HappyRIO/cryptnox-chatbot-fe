@@ -139,7 +139,7 @@ function App() {
             className="flex-1 w-full overflow-y-auto flex flex-col-reverse"
             id="chat-container"
           >
-            <div className="flex flex-col-reverse w-full justify-start space-y-reverse space-y-2">
+            <div className="flex flex-col-reverse w-full justify-start space-y-reverse space-y-5">
               <div ref={messagesEndRef} />
               {thinking && <Thinking />}
               {[...messages].reverse().map((msg, index) => (
