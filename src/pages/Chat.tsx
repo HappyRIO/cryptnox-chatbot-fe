@@ -5,7 +5,7 @@ import UserMessage from "../components/userMessage";
 import BotMessage from "../components/botMessage";
 import Thinking from "../components/thinking";
 import logo from "../assets/logo.svg";
-import sendButton from "../assets/sendbutton.svg"
+import sendButton from "../assets/sendbutton.svg";
 import { Message } from "../types";
 
 function App() {
@@ -42,7 +42,6 @@ function App() {
           body: JSON.stringify({ msg: data, chat_id: chatId }),
         }
       );
-      console.log(data);
 
       // Ensure there is a readable body
       if (!response.body) return;
@@ -65,7 +64,6 @@ function App() {
         }
 
         if (value) {
-          console.log(value);
           answer += value;
 
           // Update the last bot message text in the state
@@ -91,9 +89,8 @@ function App() {
     setInput("");
 
     inputRef.current?.focus();
-    console.log("Focus set to input element");
+    // console.log("Focus set to input element");
   };
-
   // const toggleChatVisibility = () => {
   //   setIsChatVisible((prev) => !prev);
   //   const body = document.getElementById("chatbox");
@@ -138,21 +135,22 @@ function App() {
           </div>
 
           {/* <div className="flex flex-col h-full justify-between rounded-b-lg p-2 text-black"> */}
-          <div className="flex-1 w-full overflow-y-auto space-y-4" id="chat-container">
-          <div className="flex flex-col w-full justify-end space-y-2">
-              {messages.map((msg, index) => (
+          <div
+            className="flex-1 w-full overflow-y-auto flex flex-col-reverse"
+            id="chat-container"
+          >
+            <div className="flex flex-col-reverse w-full justify-start space-y-reverse space-y-2">
+              <div ref={messagesEndRef} />
+              {thinking && <Thinking />}
+              {[...messages].reverse().map((msg, index) => (
                 <div key={index}>
                   {msg.role === "user" ? (
                     <UserMessage text={msg.content} />
                   ) : (
-                    <div>
-                      {msg.content && <BotMessage text={msg.content} />}
-                    </div>
+                    msg.content && <BotMessage text={msg.content} />
                   )}
                 </div>
               ))}
-              {thinking && <Thinking />}
-              <div ref={messagesEndRef} />
             </div>
           </div>
 
@@ -176,7 +174,7 @@ function App() {
               />
               <button
                 type="submit"
-                className="absolute right-1 top-1/2 -translate-y-1/2 p-2 border-none bg-transparent cursor-pointer"
+                className="absolute right-1 top-1/2 -translate-y-1/2 p-3.5 border-none bg-transparent cursor-pointer"
                 aria-label="Send message"
               >
                 <img src={sendButton} alt="Send message" />
