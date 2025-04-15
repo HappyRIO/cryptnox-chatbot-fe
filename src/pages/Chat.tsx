@@ -123,15 +123,15 @@ function App() {
   return (
     <div
       id="chatbot"
-      className="flex flex-col justify-end fixed bottom-0 right-0 max-w-[510px]1 h-[832px]1 bg-[url('/src/assets/background.svg')] bg-cover bg-center bg-no-repeat"
+      className="flex flex-col justify-end fixed bottom-0 right-0 rounded-[32px] bg-[url('/src/assets/background.svg')] bg-cover bg-center bg-no-repeat"
     >
       {
-        <div className="p-[26px] rounded-[32px] shadow-[0_0_15px_rgba(0,0,0,0.5)] shadow-black max-w-[510px] h-[832px] flex flex-col justify-between rounded-b-lg text-black">
+        <div className="p-5 rounded-[32px] shadow-[0_0_15px_rgba(0,0,0,0.5)] shadow-black max-w-[400px] h-[660px] flex flex-col justify-between rounded-b-[32px] text-black">
           <div
             id="chat-header"
-            className="flex justify-center items-center px-1 py-[19px]"
+            className="flex justify-center items-center px-1 py-2"
           >
-            <img src={logo} width={450} height={35.48} alt="logo" />
+            <img src={logo} width={400} height={35.48} alt="logo" />
           </div>
 
           {/* <div className="flex flex-col h-full justify-between rounded-b-lg p-2 text-black"> */}
@@ -139,7 +139,7 @@ function App() {
             className="flex-1 w-full overflow-y-auto flex flex-col-reverse"
             id="chat-container"
           >
-            <div className="flex flex-col-reverse w-full justify-start space-y-reverse space-y-5">
+            <div className="flex flex-col-reverse w-full justify-start space-y-reverse space-y-2">
               <div ref={messagesEndRef} />
               {thinking && <Thinking />}
               {[...messages].reverse().map((msg, index) => (
@@ -155,7 +155,7 @@ function App() {
           </div>
 
           {/* Footer */}
-          <div className={`w-full py-9 self-center`}>
+          <div className={`w-full py-2 self-center`}>
             <form onSubmit={handleSubmit} className="relative flex">
               <input
                 ref={inputRef}
