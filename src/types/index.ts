@@ -3,11 +3,6 @@ export interface Message {
   content: string;
 }
 
-export interface User {
-  email: string;
-  password: string;
-}
-
 export interface ChatData {
   id: number;
   chatid: string;
@@ -15,9 +10,4 @@ export interface ChatData {
   bot: string;
   edited?: number;
   timestamp: string;
-}
-
-export interface AuthResponse {
-  access_token: string;
-  token_type: string;
 }

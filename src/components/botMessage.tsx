@@ -1,6 +1,5 @@
 import React from "react";
-import ReactMarkdown from "react-markdown";
-import { Components } from "react-markdown";
+import ReactMarkdown, { Components } from "react-markdown";
 import botImg from "../assets/bot.svg";
 
 const BotMessage = ({ text }: { text: string }) => {

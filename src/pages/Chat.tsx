@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-// import { ArrowUp, Send, SendHorizonal, SendIcon } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
 import UserMessage from "../components/userMessage";
 import BotMessage from "../components/botMessage";
@@ -15,7 +14,6 @@ function App() {
   ]);
   const [thinking, setThinking] = useState(false);
   const [chatId, setChatId] = useState<string | null>(null);
-  // const [isChatVisible, setIsChatVisible] = useState<boolean>(false); // State to manage chat visibility
   const inputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -89,19 +87,7 @@ function App() {
     setInput("");
 
     inputRef.current?.focus();
-    // console.log("Focus set to input element");
   };
-  // const toggleChatVisibility = () => {
-  //   setIsChatVisible((prev) => !prev);
-  //   const body = document.getElementById("chatbox");
-  //   if (body) {
-  //     body.style.width = "50%";  // You can change this to any size
-  //     body.style.height = "50%"; // You can change this to any size
-  //   } else {
-  //     console.error("Element with id 'chatbox' not found.");
-  //   }
-
-  // };
 
   useEffect(() => {
     const chatContainer = document.getElementById("chat-container");
@@ -134,7 +120,6 @@ function App() {
             <img src={logo} width={400} height={35.48} alt="logo" />
           </div>
 
-          {/* <div className="flex flex-col h-full justify-between rounded-b-lg p-2 text-black"> */}
           <div
             className="flex-1 w-full overflow-y-auto flex flex-col-reverse"
             id="chat-container"
@@ -184,12 +169,6 @@ function App() {
           {/* </div> */}
         </div>
       }
-      {/* <div
-        onClick={toggleChatVisibility}
-        className="h-14 w-14 m-1 self-end bg-gray-500 hover:bg-gray-800 text-white rounded-full right-0  cursor-pointer flex flex-col justify-center items-center"
-      >
-        {isChatVisible ? <X className="h-8 w-8"/> : <img src={message} className="h-16 w-16 rounded-full"/>}
-      </div> */}
     </div>
   );
 }

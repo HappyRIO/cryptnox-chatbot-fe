@@ -10,10 +10,9 @@ import {
   ChevronsRight,
   Check,
 } from "lucide-react";
-// , ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight
 import ReactMarkdown from "react-markdown";
-import { toast } from "react-toastify"; // Import toast notification
-import "react-toastify/dist/ReactToastify.css"; // Import toast styles
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import type { ChatData } from "../types";
 
