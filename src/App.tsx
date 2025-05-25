@@ -10,8 +10,8 @@ function App() {
       <Routes>
         <Route path="/" element={<ChatInterface />} />
         <Route path="/chat" element={<ChatInterface />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/update" element={<UpdateDB />} />
+        <Route path="/admin/dashboard" element={<Dashboard />} />
+        <Route path="/admin/update" element={<UpdateDB />} />
       </Routes>
       <ToastContainer />
     </>
