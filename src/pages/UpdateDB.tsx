@@ -36,7 +36,7 @@ const UpdateDB = () => {
   return (
     <div>
       <AdminSidebar />
-      <div className="flex flex-col w-screen h-screen ml-52 bg-gray-100 p-4 text-black">
+      <div className="flex flex-col w-screen h-screen pl-60 bg-gray-100 p-4 text-black">
         <div className="p-6 bg-white rounded-2xl shadow-lg w-full max-w-md text-center">
           <h1 className="text-xl font-semibold mb-4">🔄 Update Vector DB</h1>
           <button

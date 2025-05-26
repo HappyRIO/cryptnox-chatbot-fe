@@ -137,7 +137,7 @@ const Dashboard = () => {
     <div className="flex overflow-auto w-screen min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-200">
       <AdminSidebar />
 
-      <div className="flex-1 h-full min-h-screen ml-52 px-4 py-8 bg-white dark:bg-gray-800 text-black dark:text-white">
+      <div className="flex-1 h-full min-h-screen pl-56 pr-2 m-0 1px-4 py-8 bg-white dark:bg-gray-800 text-black dark:text-white">
         <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-8">
           Conversation History
         </h1>
